@@ -45,7 +45,7 @@ class Person: # base class for a person
         return self.name  # returns name wehn object is printed
 
 class Customer(Person): # Customers class inherits from Persons 
-        FAVOURITE_FOODS = ["PIZZA", "BURGER", "PASTA"]
+        FAVOURITE_FOODS = ["PIZZA", "BURGER", "PASTA", "CHINESE"]
 
         def __init__(self, name, favourite_food): # constructor for Customers
             super().__init__(name) # calls Person constructor and sets favourite food
@@ -75,11 +75,19 @@ class PremiumCustomer(Customer):  # subclass of Customer
 
 
 def main(): #m ain function where all the functions we made above gets called
+
+    print("Restaurant Rating System")  # prints heading
     save_customer("alice smith", "alice@example.com")
     add_rating("alice smith", 8) # add first rating 
     add_rating("joseph body", 9) # add second rating 
 
     print("Average rating:", get_average_rating()) # print average rating 
+
+    c1 = Customer("James Lee", "chinese")  # creates Customer object
+    c2 = PremiumCustomer("Lewis cooper", "pasta", "gold")  # creates PremiumCustomer object
+
+    print(c1)  # prints customer info
+    print(c2)  # prints premium customer info
 
 if __name__ == "__main__":
     main() # runs main function
