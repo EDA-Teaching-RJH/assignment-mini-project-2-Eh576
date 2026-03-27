@@ -65,6 +65,15 @@ class Customer(Person): # Customers class inherits from Persons
         def __str__(self):
             return f"{self.name} likes {self.favourite_food}" # return in string format 
 
+class PremiumCustomer(Customer):  # subclass of Customer
+    def __init__(self, name, favourite_food, membership_level): 
+        super().__init__(name, favourite_food)  # calls parent constructor
+        self.membership_level = membership_level.strip().title()  # formats membership level
+
+    def __str__(self):  # string method
+        return f"{self.name} likes {self.favourite_food} and has {self.membership_level} membership"  # formatted output
+
+
 def main(): #m ain function where all the functions we made above gets called
     save_customer("alice smith", "alice@example.com")
     add_rating("alice smith", 8) # add first rating 
