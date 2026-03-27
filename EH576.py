@@ -20,11 +20,15 @@ def save_customer(name, email, filename="customers.txt"): # function to save cus
     with open(filename, "a", encoding="utf-8") as file: # opens file in apend mode and writes customers details and data to files
         file.write(f"{name},{email}\n")
 
+def add_rating(name, rating, filename="ratings.csv"): # function to store ratings
+    with open(filename, "a", newline="", encoding="utf-8") as file: # opens CSV file in append mode 
+        writer = csv.writer(file) # creates CSV writter
+        writer.writerow([clean_name(name), rating]) # writes customer rating
 
 def main(): #m ain function where all the functions we made above gets called
     save_customer("alice smith", "alice@example.com")
-    print("Customer saved") 
-
+    add_rating("alice smith", 8)
+    print("Data saved") 
 
 if __name__ == "__main__":
     main() # runs main function
