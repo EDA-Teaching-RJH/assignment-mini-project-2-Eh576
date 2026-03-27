@@ -45,12 +45,25 @@ class Person: # base class for a person
         return self.name  # returns name wehn object is printed
 
 class Customer(Person): # Customers class inherits from Persons 
-    def __init__(self, name, favourite_food): # constructor for Customers
-        super().__init__(name) # calls Person constructor and sets favourite food
-        self.favourite_food = favourite_food
+        FAVOURITE_FOODS = ["PIZZA", "BURGER", "PASTA"]
 
-    def __str__(self):
-        return f"{self.name} likes {self.favourite_food}" # return in string format 
+        def __init__(self, name, favourite_food): # constructor for Customers
+            super().__init__(name) # calls Person constructor and sets favourite food
+            self.favourite_food = favourite_food
+
+        @property 
+        def favourite_food(self):
+            return self._favourite_food  # returns variable
+
+        @favourite_food.setter  # setter for favourite_food
+        def favourite_food(self, value):
+            value = value.strip().upper()  
+            if value not in self.FAVOURITE_FOODS:  # checks if valid food
+                raise ValueError("Invalid food choice")  # raises error if invalid
+            self._favourite_food = value  # stores valid food
+
+        def __str__(self):
+            return f"{self.name} likes {self.favourite_food}" # return in string format 
 
 def main(): #m ain function where all the functions we made above gets called
     save_customer("alice smith", "alice@example.com")
