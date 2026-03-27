@@ -25,10 +25,23 @@ def add_rating(name, rating, filename="ratings.csv"): # function to store rating
         writer = csv.writer(file) # creates CSV writter
         writer.writerow([clean_name(name), rating]) # writes customer rating
 
+def get_average_rating(filename="ratings.csv"):
+    with open(filename, "r", newline="", encoding="utf-8") as file:  # opens CSV file in read mode and reads CSV
+        reader = csv.reader(file)
+        ratings = [int(row[1]) for row in reader]
+
+    if len(ratings) == 0:
+        return 0
+
+    return round(sum(ratings) / len(ratings), 2)
+
+
 def main(): #m ain function where all the functions we made above gets called
     save_customer("alice smith", "alice@example.com")
-    add_rating("alice smith", 8)
-    print("Data saved") 
+    add_rating("alice smith", 8) # add first rating 
+    add_rating("joseph body", 9) # add second rating 
+
+    print("Average rating:", get_average_rating()) # print average rating 
 
 if __name__ == "__main__":
     main() # runs main function
