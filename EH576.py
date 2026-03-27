@@ -23,7 +23,7 @@ def save_customer(name, email, filename="customers.txt"): # function to save cus
 def add_rating(name, rating, filename="ratings.csv"): # function to store ratings
     with open(filename, "a", newline="", encoding="utf-8") as file: # opens CSV file in append mode 
         writer = csv.writer(file) # creates CSV writter
-        writer.writerow([clean_name(name), rating]) # writes customer rating
+        writer.writerow([clean_name(name), rating]) # writes customers rating
 
 def get_average_rating(filename="ratings.csv"):
     with open(filename, "r", newline="", encoding="utf-8") as file:  # opens CSV file in read mode and reads CSV
@@ -33,7 +33,16 @@ def get_average_rating(filename="ratings.csv"):
     if len(ratings) == 0:
         return 0
 
-    return round(sum(ratings) / len(ratings), 2)
+    return round(sum(ratings) / len(ratings), 2) # calculates average
+
+class Person: # base class for a person
+    def __init__(self, name):
+        if not name.strip(): 
+            raise ValueError("Name required") # check if name is empty if empty it raises error 
+        self.name = clean_name(name)
+
+    def __str__(self):  
+        return self.name  # returns name wehn object is printed
 
 
 def main(): #m ain function where all the functions we made above gets called
